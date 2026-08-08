@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom transitions and sliders styling */
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
