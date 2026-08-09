@@ -2,5 +2,5 @@ apiVersion: v2
 name: image-converter
 description: A Helm chart for deploying the Image Converter Next.js app
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.0.0"
