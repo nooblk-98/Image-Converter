@@ -1,0 +1,8 @@
+Image Converter has been deployed.
+
+The app is exposed via a ClusterIP Service, so it's only reachable from
+inside the cluster. To reach it from your machine, port-forward:
+
+  kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ include "image-converter.fullname" . }} 3000:{{ .Values.service.port }}
+
+Then open http://localhost:3000
