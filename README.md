@@ -2,39 +2,74 @@
 
 Repository: [github.com/nooblk-98/Image-Converter](https://github.com/nooblk-98/Image-Converter)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Convert PNG, JPG, WEBP, GIF and HEIC images online — fast, free, and 100% client-side.
+Nothing is uploaded to a server: every conversion runs in the browser via Canvas
+(and `heic2any` for HEIC/HEIF), so images never leave the user's machine.
 
-## Getting Started
+## Features
 
-First, run the development server:
+- Convert between PNG, JPG/JPEG, WEBP, GIF and HEIC/HEIF
+- Batch upload, convert, and download as a ZIP
+- Adjustable quality for lossy output formats (WEBP, JPG)
+- Fully client-side — no uploads, no accounts
+
+## Tech stack
+
+- [Next.js](https://nextjs.org) 16 (App Router) + React 19
+- Tailwind CSS
+- `heic2any` for HEIC/HEIF decoding, `jszip` for batch downloads
+
+## Getting started
+
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app. Edit `app/page.js` or
+`components/ImageConverter.js` — the page hot-reloads as you edit.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # production build
+npm run start   # run the production build
+npm run lint    # eslint
+```
 
-## Learn More
+## Running with Docker
 
-To learn more about Next.js, take a look at the following resources:
+A multi-stage [Dockerfile](Dockerfile) builds a minimal production image using Next.js'
+standalone output.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker build -t image-converter .
+docker run -p 3000:3000 image-converter
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Prebuilt images are published to GHCR by [`.github/workflows/release.yml`](.github/workflows/release.yml):
 
-## Deploy on Vercel
+```bash
+docker run -p 3000:3000 ghcr.io/nooblk-98/image-converter:1.0.0
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploying to Kubernetes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A Helm chart is available at [charts/helm](charts/helm) — see its
+[README](charts/helm/README.md) for configuration options.
+
+```bash
+helm install image-converter ./charts/helm
+```
+
+## Project structure
+
+```
+app/                  Next.js App Router pages (layout, home page, sitemap, robots)
+components/           UI components (ImageConverter, UploadArea, Navbar, Footer)
+lib/                  Conversion logic, file helpers, format metadata
+charts/helm/          Helm chart for Kubernetes deployment
+Dockerfile            Multi-stage production image
+```
