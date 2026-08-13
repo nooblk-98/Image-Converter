@@ -1,4 +1,4 @@
-## Image Converter
+# Image Converter
 
 A fast, simple, and privacy-focused online image converter built with Next.js and JavaScript.
 
