@@ -4,5 +4,5 @@ services:
     image: image-converter:latest
     container_name: image-converter
     ports:
-      - "3000:3000"
+      - "34000:3000"
     restart: unless-stopped
