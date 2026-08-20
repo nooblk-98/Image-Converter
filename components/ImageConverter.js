@@ -136,7 +136,7 @@ export default function ImageConverter() {
     await downloadZip(zipList, `converted-${sourceFormat}-to-${targetFormat}.zip`);
   };
 
-  const showQualityControl = ['webp', 'jpg', 'jpeg'].includes(targetFormat);
+  const showQualityControl = ['webp', 'jpg', 'jpeg', 'avif'].includes(targetFormat);
   const totalConverted = files.filter(f => f.status === 'success').length;
   const hasFiles = files.length > 0;
 
@@ -160,6 +160,8 @@ export default function ImageConverter() {
               <option value="webp">WEBP</option>
               <option value="gif">GIF</option>
               <option value="heic">HEIC</option>
+              <option value="svg">SVG</option>
+              <option value="avif">AVIF</option>
             </select>
           </div>
 
@@ -371,7 +373,11 @@ export default function ImageConverter() {
                 type="file"
                 className="hidden"
                 multiple
-                accept={sourceFormat === 'jpg' ? '.jpg,.jpeg' : sourceFormat === 'heic' ? '.heic,.heif' : `.${sourceFormat}`}
+                accept={
+                  sourceFormat === 'jpg' ? '.jpg,.jpeg' 
+                  : sourceFormat === 'heic' ? '.heic,.heif' 
+                  : `.${sourceFormat}`
+                }
                 onChange={(e) => {
                   if (e.target.files && e.target.files.length > 0) {
                     handleFilesSelected(e.target.files);

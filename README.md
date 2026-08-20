@@ -1,6 +1,6 @@
 # Image Converter
 
-Repository: [github.com/nooblk-98/Image-Converter](https://github.com/nooblk-98/Image-Converter)
+A fast, simple, and privacy-focused online image converter built with Next.js and JavaScript.
 
 Convert PNG, JPG, WEBP, GIF and HEIC images online — fast, free, and 100% client-side.
 Nothing is uploaded to a server: every conversion runs in the browser via Canvas
