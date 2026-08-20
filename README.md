@@ -55,14 +55,14 @@ Prebuilt images are published to GHCR by [`.github/workflows/release.yml`](.gith
 docker run -p 3000:3000 ghcr.io/nooblk-98/image-converter:1.0.0
 ```
 
-## Deploying to Kubernetes
-
-A Helm chart is available at [charts/helm](charts/helm) — see its
-[README](charts/helm/README.md) for configuration options.
+## Running with Docker Compose
 
 ```bash
-helm install image-converter ./charts/helm
+docker compose up -d --build
 ```
+
+This builds the image from the [Dockerfile](Dockerfile) and starts it on
+[http://localhost:3000](http://localhost:3000). See [docker-compose.yml](docker-compose.yml).
 
 ## Project structure
 
@@ -70,6 +70,6 @@ helm install image-converter ./charts/helm
 app/                  Next.js App Router pages (layout, home page, sitemap, robots)
 components/           UI components (ImageConverter, UploadArea, Navbar, Footer)
 lib/                  Conversion logic, file helpers, format metadata
-charts/helm/          Helm chart for Kubernetes deployment
 Dockerfile            Multi-stage production image
+docker-compose.yml    Docker Compose service definition
 ```
