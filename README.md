@@ -2,30 +2,74 @@
 
 A fast, simple, and privacy-focused online image converter built with Next.js and JavaScript.
 
-Convert images between popular formats directly in your browser — without uploading your images to a server for supported client-side conversions.
+Convert PNG, JPG, WEBP, GIF and HEIC images online — fast, free, and 100% client-side.
+Nothing is uploaded to a server: every conversion runs in the browser via Canvas
+(and `heic2any` for HEIC/HEIF), so images never leave the user's machine.
 
-Supported conversions depend on the browser capabilities and the image-processing libraries used by the application.
+## Features
 
-## How It Works
+- Convert between PNG, JPG/JPEG, WEBP, GIF and HEIC/HEIF
+- Batch upload, convert, and download as a ZIP
+- Adjustable quality for lossy output formats (WEBP, JPG)
+- Fully client-side — no uploads, no accounts
 
-The converter prioritizes client-side image processing.
+## Tech stack
 
-Instead of uploading an image to a conversion server:
+- [Next.js](https://nextjs.org) 16 (App Router) + React 19
+- Tailwind CSS
+- `heic2any` for HEIC/HEIF decoding, `jszip` for batch downloads
 
-User selects image
-       ↓
-Browser reads image
-       ↓
-JavaScript processes image
-       ↓
-Canvas / image-processing library
-       ↓
-Converted image Blob
-       ↓
-User downloads converted image
+## Getting started
 
-This means supported conversions can be performed directly on the user's device.
+Install dependencies and run the dev server:
 
-## Support
+```bash
+npm install
+npm run dev
+```
 
-If you find this project useful, consider giving the repository a star on GitHub.
+Open [http://localhost:3000](http://localhost:3000) to see the app. Edit `app/page.js` or
+`components/ImageConverter.js` — the page hot-reloads as you edit.
+
+Other scripts:
+
+```bash
+npm run build   # production build
+npm run start   # run the production build
+npm run lint    # eslint
+```
+
+## Running with Docker
+
+A multi-stage [Dockerfile](Dockerfile) builds a minimal production image using Next.js'
+standalone output.
+
+```bash
+docker build -t image-converter .
+docker run -p 3000:3000 image-converter
+```
+
+Prebuilt images are published to GHCR by [`.github/workflows/release.yml`](.github/workflows/release.yml):
+
+```bash
+docker run -p 3000:3000 ghcr.io/nooblk-98/image-converter:1.0.0
+```
+
+## Running with Docker Compose
+
+```bash
+docker compose up -d --build
+```
+
+This builds the image from the [Dockerfile](Dockerfile) and starts it on
+[http://localhost:3000](http://localhost:3000). See [docker-compose.yml](docker-compose.yml).
+
+## Project structure
+
+```
+app/                  Next.js App Router pages (layout, home page, sitemap, robots)
+components/           UI components (ImageConverter, UploadArea, Navbar, Footer)
+lib/                  Conversion logic, file helpers, format metadata
+Dockerfile            Multi-stage production image
+docker-compose.yml    Docker Compose service definition
+```

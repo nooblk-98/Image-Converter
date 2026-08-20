@@ -1,0 +1,8 @@
+services:
+  image-converter:
+    build: .
+    image: image-converter:latest
+    container_name: image-converter
+    ports:
+      - "34000:3000"
+    restart: unless-stopped
